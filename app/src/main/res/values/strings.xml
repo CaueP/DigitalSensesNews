@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DigitalSensesNews</string>
+    <string name="msg_last_item">This is the last item</string>
+    <string name="msg_first_item">This is the first item</string>
 </resources>
