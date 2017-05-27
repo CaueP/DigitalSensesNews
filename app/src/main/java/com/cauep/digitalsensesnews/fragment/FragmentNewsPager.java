@@ -89,13 +89,14 @@ public class FragmentNewsPager extends Fragment {
             @Override
             public void onClick(View v) {
                 if (mViewPager.getCurrentItem() == mNewsPagerAdapter.getCount() - 1) {
-                    Toast.makeText(getActivity(), R.string.msg_last_item, Toast.LENGTH_SHORT).show();
                     mViewPager.setCurrentItem(0);
                 } else {
                     mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
                 }
+                checkNewsItemState();
             }
         });
+
 
         // PageChangeListeners
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -115,21 +116,36 @@ public class FragmentNewsPager extends Fragment {
 
                 if (state == ViewPager.SCROLL_STATE_SETTLING)
                     Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_SETTLING");
-                if (state == ViewPager.SCROLL_STATE_IDLE)
-                    Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_IDLE");
                 if (state == ViewPager.SCROLL_STATE_DRAGGING)
                     Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_DRAGGING");
 
-                    if (state == ViewPager.SCROLL_STATE_SETTLING) {
-//                    View currentView = mNewsPagerAdapter.getItem(mViewPager.getCurrentItem()).getView();
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_IDLE");
+                    //                    View currentView = mNewsPagerAdapter.getItem(mViewPager.getCurrentItem()).getView();
 //
 //                    String newsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_headline)).getText().toString(); //((TextView) currentView.findViewById(R.id.textView_news_headline)).getText().toString();
 //
 //                    rootView.setContentDescription(newsHeadline);
 //                    rootView.setFocusableInTouchMode(true);
 //                    rootView.setFocusable(true);
-                    }
+                }
             }
+
         });
+
+
+    }
+
+    /**
+     * Check the current item and shows message to the user if this is the last news
+     */
+    private void checkNewsItemState() {
+        if (mViewPager.getCurrentItem() == 0) {
+            Toast.makeText(getActivity(), R.string.msg_first_item, Toast.LENGTH_SHORT).show();
+        }
+        if (mViewPager.getCurrentItem() == mNewsPagerAdapter.getCount() - 1) {
+            Toast.makeText(getActivity(), R.string.msg_last_item, Toast.LENGTH_SHORT).show();
+
+        }
     }
 }
