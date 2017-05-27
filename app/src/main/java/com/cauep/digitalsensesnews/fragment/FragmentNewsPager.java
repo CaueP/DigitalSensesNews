@@ -18,7 +18,9 @@ import com.cauep.digitalsensesnews.controller.NewsPagerAdapter;
 import org.w3c.dom.Text;
 
 /**
- * Created by CaueGarciaPolimanti on 5/27/2017.
+ * @author Caue Garcia Polimanti
+ * @version 1.0
+ * Created on 05/27/2017
  */
 
 public class FragmentNewsPager extends Fragment {

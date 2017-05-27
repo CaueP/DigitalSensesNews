@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.cauep.digitalsensesnews.R;
 
-import org.w3c.dom.Text;
-
 /**
- * Created by CaueGarciaPolimanti on 5/27/2017.
+ * @author Caue Garcia Polimanti
+ * @version 1.0
+ * Created on 05/27/2017
  */
 public class FragmentNewsHeadline extends Fragment {
     static final String TAG = "FragmentNewsHeadline";
@@ -28,7 +28,7 @@ public class FragmentNewsHeadline extends Fragment {
         // The last two arguments ensure LayoutParams are inflated
         // properly.
         View rootView = inflater.inflate(
-                R.layout.fragment_news, container, false);
+                R.layout.fragment_news_headline, container, false);
         Bundle args = getArguments();
 
         String newsId = "news" + Integer.toString(args.getInt(ARG_OBJECT));

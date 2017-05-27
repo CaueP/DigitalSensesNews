@@ -8,25 +8,31 @@
 
     <TextView
         android:id="@+id/textView_news_headline"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="News headline"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
         android:text="TextView"
         android:textAlignment="textStart"
         android:textSize="36sp"
-        android:textStyle="bold"
-        tools:text="Headline"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_news_body"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:text='iguel Rômulo, Giovanna Lancellotti e Rodrigo Simas (Foto: Daniel Pinheiro/AgNews )\n\nRodrigo Simas, Giovanna Lancellotti e Miguel Rômulo estavam entre os famosos que foram visitar Yanna Lavigne na maternidade Perinatal, na Barra da Tijuca, zona oeste do Rio, na tarde desta sexta (26).\n\nA atriz deu à luz sua primeira filha, Madalena, que nasceu da relação dela com o ex-namorado, o galã Bruno Gissoni, irmão de Simas. Mais cedo, Mariana Uhlmann e Felipe Simas também visitaram a bebê e a atriz se derreteu na web. \"Admirando a pureza e o amor que ela nos trouxe! Te amo Mada de titia!\", postou ela.\n\nLEIA MAIS: Nasce Madalena, filha de Yanna Lavigne e Bruno Gissoni\n\nLEIA MAIS: Na reta final da gravidez, Yanna Lavigne relaxa em praia\n\nRodrigo Simas (Foto: Daniel Pinheiro/AgNews )\n\nRodrigo Simas (Foto: Daniel Pinheiro/AgNews )\n\nRodrigo Simas (Foto: Daniel Pinheiro/AgNews )\n\nRodrigo Simas visita Yanna Lavigne (Foto: Daniel Pinheiro/AgNews)\n\nMiguel Rômulo (Fo'
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="8dp" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_news_headline"
+        app:layout_constraintVertical_bias="0.501" />
 </android.support.constraint.ConstraintLayout>

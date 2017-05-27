@@ -6,9 +6,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.cauep.digitalsensesnews.fragment.FragmentNewsHeadline;
-
 /**
- * Created by CaueGarciaPolimanti on 5/27/2017.
+ * @author Caue Garcia Polimanti
+ * @version 1.0
+ * Created on 05/27/2017
  */
 
 // Since this is an object collection, use a FragmentStatePagerAdapter,

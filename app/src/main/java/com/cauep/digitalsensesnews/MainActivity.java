@@ -1,12 +1,14 @@
 package com.cauep.digitalsensesnews;
 
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-
-import com.cauep.digitalsensesnews.controller.NewsPagerAdapter;
 import com.cauep.digitalsensesnews.fragment.FragmentNewsPager;
 
+/**
+ * @author Caue Garcia Polimanti
+ * @version 1.0
+ * Created on 05/27/2017
+ */
 public class MainActivity extends AppCompatActivity {
 
 
