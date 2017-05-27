@@ -26,7 +26,6 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
         // Our object is just an integer :-P
         args.putInt(FragmentNewsHeadline.ARG_OBJECT, i + 1);
         fragment.setArguments(args);
-
         return fragment;
     }
 

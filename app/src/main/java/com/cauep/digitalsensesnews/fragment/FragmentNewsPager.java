@@ -2,6 +2,7 @@ package com.cauep.digitalsensesnews.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ShareCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -93,7 +94,7 @@ public class FragmentNewsPager extends Fragment {
                 } else {
                     mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
                 }
-                checkNewsItemState();
+//                checkNewsItemState();
             }
         });
 
@@ -102,7 +103,7 @@ public class FragmentNewsPager extends Fragment {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Log.d(TAG, "onPageScrolled");
+                //Log.d(TAG, "onPageScrolled");
             }
 
             @Override
@@ -115,19 +116,33 @@ public class FragmentNewsPager extends Fragment {
                 Log.d(TAG, "onPageScrollStateChanged");
 
                 if (state == ViewPager.SCROLL_STATE_SETTLING)
-                    Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_SETTLING");
+                    //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_SETTLING");
                 if (state == ViewPager.SCROLL_STATE_DRAGGING)
-                    Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_DRAGGING");
+                    //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_DRAGGING");
 
                 if (state == ViewPager.SCROLL_STATE_IDLE) {
                     Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_IDLE");
-                    //                    View currentView = mNewsPagerAdapter.getItem(mViewPager.getCurrentItem()).getView();
+                    View currentView = mNewsPagerAdapter.getItem(mViewPager.getCurrentItem()).getView();
+                    //FragmentNewsHeadline frag = (FragmentNewsHeadline) mNewsPagerAdapter.getItem(mViewPager.getCurrentItem());
+
+
+                    // trying to get from fragment
+//                    View fragView = getActivity().getSupportFragmentManager().findFragmentByTag(Integer.toString(mViewPager.getCurrentItem()+1)).getView();
+//                    TextView textViewNewsHeadling = (TextView) fragView.findViewById(R.id.textView_news_headline);
+//                    String newsHeadline = textViewNewsHeadling.getText().toString();
+
+                    // getting from rootView
+//                    TextView textViewNewsHeadling = (TextView) rootView.findViewById(R.id.textView_news_headline);
+//                    String newsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_headline)).getText().toString();
+
+                    // Show toast message
+//                    Toast.makeText(getActivity(), newsHeadline, Toast.LENGTH_LONG).show();
 //
-//                    String newsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_headline)).getText().toString(); //((TextView) currentView.findViewById(R.id.textView_news_headline)).getText().toString();
-//
-//                    rootView.setContentDescription(newsHeadline);
-//                    rootView.setFocusableInTouchMode(true);
-//                    rootView.setFocusable(true);
+//                    textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
+//                    textViewNewsHeadling.setContentDescription(newsHeadline);
+//                    textViewNewsHeadling.setFocusableInTouchMode(true);
+//                    textViewNewsHeadling.setFocusable(true);
+                    checkNewsItemState();
                 }
             }
 
@@ -137,9 +152,10 @@ public class FragmentNewsPager extends Fragment {
     }
 
     /**
-     * Check the current item and shows message to the user if this is the last news
+     * Check the current item and shows message to the user if this is the first or last news
      */
     private void checkNewsItemState() {
+
         if (mViewPager.getCurrentItem() == 0) {
             Toast.makeText(getActivity(), R.string.msg_first_item, Toast.LENGTH_SHORT).show();
         }
