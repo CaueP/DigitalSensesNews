@@ -16,7 +16,13 @@ public class News implements Serializable{
     @Expose
     @SerializedName("title")
     private String title;
+
+    @Expose
+    @SerializedName("text")
     private String body;
+
+    @Expose
+    @SerializedName("publish_date")
     private String date;
 
     // Constructor

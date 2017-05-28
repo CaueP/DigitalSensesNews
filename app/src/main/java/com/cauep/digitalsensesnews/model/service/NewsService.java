@@ -22,6 +22,6 @@ public interface NewsService {
      * @param category Category of the articles (Available: sports, economy, tech, health)
      * @return Return a List of News objects
      */
-    @GET("language}/{category}")
+    @GET("news/{language}/{category}")
     Call<ArrayList<News>> getNews(@Path("language") String language, @Path("category") String category);
 }

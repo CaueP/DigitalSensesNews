@@ -15,5 +15,6 @@ public class Constants {
     public class KEY {
         public static final String NEWS = "news";
         public static final String NEWS_LIST = "news_list";
+        public static final String NEWS_ITEM_INDEX = "news_index";
     }
 }

@@ -9,18 +9,23 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cauep.digitalsensesnews.R;
+import com.cauep.digitalsensesnews.model.News;
+import com.cauep.digitalsensesnews.utils.Constants;
 
 /**
  * @author Caue Garcia Polimanti
  * @version 1.0
- * Created on 05/27/2017
+ *          Created on 05/27/2017
  */
 public class FragmentNewsHeadline extends Fragment {
     static final String TAG = "FragmentNewsHeadline";
-    public static final String ARG_OBJECT = "object";
 
     // Views
-    public TextView textViewNewsHeadline;
+    public TextView textViewNewsTitle;
+
+    // Data
+    private News news;
+    private String newsIndex;
 
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -31,20 +36,26 @@ public class FragmentNewsHeadline extends Fragment {
                 R.layout.fragment_news_title, container, false);
         Bundle args = getArguments();
 
-        String newsId = "news" + Integer.toString(args.getInt(ARG_OBJECT));
+        if (args != null) {
+            news = (News) args.getSerializable(Constants.KEY.NEWS);
+            newsIndex = "news" + Integer.toString(args.getInt(Constants.KEY.NEWS_ITEM_INDEX));
+        }
 
-        Log.d(TAG, "News ID: " + newsId);
+        Log.d(TAG, "News Index: " + newsIndex);
 
-        textViewNewsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_title));
+        textViewNewsTitle = ((TextView) rootView.findViewById(R.id.textView_news_title));
 
-        textViewNewsHeadline.setText(newsId);
-        rootView.setContentDescription(textViewNewsHeadline.getText());
-        textViewNewsHeadline.setContentDescription(textViewNewsHeadline.getText());
-        textViewNewsHeadline.setFocusableInTouchMode(true);
-        textViewNewsHeadline.setFocusable(true);
+        if (news != null) {
+            textViewNewsTitle.setText(news.getTitle());
+            rootView.setContentDescription(textViewNewsTitle.getText());
+            textViewNewsTitle.setContentDescription(textViewNewsTitle.getText());
+            textViewNewsTitle.setFocusableInTouchMode(true);
+            textViewNewsTitle.setFocusable(true);
+        } else Log.d(TAG, "NEWS IS NULL");
+
 
         // Setting Tag to get this fragment on other activities
-        rootView.setTag(newsId);
+        rootView.setTag(newsIndex);
         return rootView;
     }
 }

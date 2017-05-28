@@ -36,10 +36,17 @@ public class MainActivity extends AppCompatActivity {
 
 
         loadNews("pt", "tech");
+        //loadFakeNews("pt", "tech");
     }
 
     private void loadFakeNews(String language, String category){
+        ArrayList<News> newsFakeList = new ArrayList<News>();
 
+        for(int i = 0; i < 5; i++)
+        newsFakeList.add(
+                new News(i + " Pelé namora xuxa", "Pelé declara seu amor por xuxa e a loira corresponde.", "20/02/1970 - 10:40"));
+
+        loadNewsPager(newsFakeList);
     }
 
     /**
@@ -48,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
      * @param category
      */
     private void loadNews(String language, String category) {
+        Log.d(TAG, "Called loadNews");
         Call<ArrayList<News>> newsCall = newsService.getNews(language, category);
 
         Callback<ArrayList<News>> newsCallback = new Callback<ArrayList<News>>() {
