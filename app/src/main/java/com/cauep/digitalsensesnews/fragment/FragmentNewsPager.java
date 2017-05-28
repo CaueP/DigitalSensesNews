@@ -220,20 +220,20 @@ public class FragmentNewsPager extends Fragment {
      */
     public void readNewsForUser() {
         // getting from rootView
-        TextView textViewNewsHeadling = (TextView) rootView.findViewById(R.id.textView_news_title);
-        String newsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_title)).getText().toString();
+        TextView textViewNewsTitle = (TextView) rootView.findViewById(R.id.textView_news_title);
+        String newsTitle = ((TextView) rootView.findViewById(R.id.textView_news_title)).getText().toString();
 
         // Show toast message
-//                    Toast.makeText(getActivity(), newsHeadline, Toast.LENGTH_LONG).show();
-        Log.d(TAG, mViewPager.getCurrentItem() + " - newsHeadline: " + newsHeadline);
-        //textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
-//        textViewNewsHeadling.setContentDescription(newsHeadline);
-//        textViewNewsHeadling.setFocusableInTouchMode(true);
-//        textViewNewsHeadling.setFocusable(true);
+//                    Toast.makeText(getActivity(), newsTitle, Toast.LENGTH_LONG).show();
+        Log.d(TAG, mViewPager.getCurrentItem() + " - newsTitle: " + newsTitle);
+        //textViewNewsTitle.getRootView().setContentDescription(newsTitle);
+//        textViewNewsTitle.setContentDescription(newsTitle);
+//        textViewNewsTitle.setFocusableInTouchMode(true);
+//        textViewNewsTitle.setFocusable(true);
 
-        textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
-        textViewNewsHeadling.getRootView().setFocusableInTouchMode(true);
-        textViewNewsHeadling.getRootView().setFocusable(true);
+        textViewNewsTitle.getRootView().setContentDescription(newsTitle);
+        textViewNewsTitle.getRootView().setFocusableInTouchMode(true);
+        textViewNewsTitle.getRootView().setFocusable(true);
     }
 
     /**

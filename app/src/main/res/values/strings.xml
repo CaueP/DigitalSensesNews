@@ -13,9 +13,10 @@
     <string name="categories_health">Health</string>
     <string name="categories_tech">Technology</string>
     <string name="categories_last_news">Last news</string>
-    
-    <string name="news_authors">Authors: %s</string>
+
+    <string name="news_authors">Author: %s</string>
+    <string name="news_image_description">News image</string>
     <string name="news_publish_date">Published on: %s</string>
-    <string name="news_image_description">News top image</string>
+    <string name="loading_content">Loading content</string>
 
 </resources>

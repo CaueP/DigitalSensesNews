@@ -13,4 +13,9 @@
     <string name="categories_sports">Esportes</string>
     <string name="categories_tech">Tecnologia</string>
     <string name="categories_last_news">Últimas notícias</string>
+
+    <string name="news_authors">Autor: %s</string>
+    <string name="news_publish_date">Publicado em: %s</string>
+    <string name="news_image_description">Imagem da notícia</string>
+    <string name="loading_content">Carregando conteúdo</string>
 </resources>

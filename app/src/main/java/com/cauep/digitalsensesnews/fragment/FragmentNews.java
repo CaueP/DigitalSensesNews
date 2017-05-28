@@ -59,7 +59,13 @@ public class FragmentNews extends Fragment {
             else
                 textViewNewsAuthors.setMaxHeight(0);
 
-            textViewNewsPublishDate.setText(getString(R.string.news_publish_date, news.getPublishDate()));
+            if (news.getPublishDate().equals("None")) {
+                textViewNewsPublishDate.setText("");
+                textViewNewsPublishDate.setMaxHeight(0);
+            } else {
+                textViewNewsPublishDate.setText(getString(R.string.news_publish_date, news.getPublishDate()));
+            }
+
 
             if (news.getImageSrc() != null || news.getImageSrc().equals("")) {
                 Glide.with(rootView.getContext())
@@ -67,13 +73,15 @@ public class FragmentNews extends Fragment {
                         .into(imageViewNewsImage);
             } else imageViewNewsImage.setMaxHeight(0);
 
-            textViewNewsBody.setText(news.getBody());
+
 
             textViewNewsTitle.setContentDescription(textViewNewsTitle.getText());
 
-            textViewNewsTitle.setContentDescription(textViewNewsBody.getText());
-            textViewNewsTitle.setFocusableInTouchMode(true);
-            textViewNewsTitle.setFocusable(true);
+            //textViewNewsTitle.setContentDescription(textViewNewsBody.getText());
+
+            textViewNewsBody.setText(news.getBody());
+            textViewNewsBody.setFocusableInTouchMode(true);
+            textViewNewsBody.setFocusable(true);
         } else Log.d(TAG, "NEWS IS NULL");
 
         return rootView;

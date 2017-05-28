@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 
 import com.cauep.digitalsensesnews.fragment.FragmentCategories;
 import com.cauep.digitalsensesnews.fragment.FragmentNews;
@@ -36,6 +38,9 @@ public class MainActivity extends AppCompatActivity
     NewsService newsService = ServiceGenerator.createService(NewsService.class);
     CategoryService categoryService = ServiceGenerator.createService(CategoryService.class);
 
+    // View
+    ProgressBar mainPageProgressBar;
+
     // Data
     ArrayList<News> newsList = null;
     ArrayList<Category> categoriesList = null;
@@ -50,6 +55,10 @@ public class MainActivity extends AppCompatActivity
         Log.d(TAG, "==========A LINGUAGEM ATUAL É: " + systemLanguage);
         Log.d(TAG,"getISO3Language:  " + Locale.getDefault().getISO3Language());
         Log.d(TAG,"getDisplayLanguage:  " + Locale.getDefault().getDisplayLanguage());
+
+        mainPageProgressBar = (ProgressBar) findViewById(R.id.main_page_progressBar);
+
+        mainPageProgressBar.setVisibility(View.VISIBLE);
 
         loadCategories();
         //loadFakeNews("pt", "tech");
@@ -70,9 +79,12 @@ public class MainActivity extends AppCompatActivity
     private void loadCategories() {
         Call<ArrayList<Category>> categoriesCall = categoryService.getCategories();
 
+        mainPageProgressBar.setVisibility(View.VISIBLE);
+
         Callback<ArrayList<Category>> categoriesCallback = new Callback<ArrayList<Category>>() {
             @Override
             public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
+                mainPageProgressBar.setVisibility(View.INVISIBLE);
 
                 if (response.isSuccessful()) {
                     Log.d(TAG, "loadCategories - onResponse isSuccessful");
@@ -88,6 +100,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onFailure(Call<ArrayList<Category>> call, Throwable t) {
+                mainPageProgressBar.setVisibility(View.INVISIBLE);
                 Log.d(TAG, "loadCategories - onFailure: " + t.getMessage());
             }
         };
@@ -103,11 +116,12 @@ public class MainActivity extends AppCompatActivity
      */
     private void loadNews(String language, String category) {
         Call<ArrayList<News>> newsCall = newsService.getNews(language, category);
+        mainPageProgressBar.setVisibility(View.VISIBLE);
 
         Callback<ArrayList<News>> newsCallback = new Callback<ArrayList<News>>() {
             @Override
             public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
-
+                mainPageProgressBar.setVisibility(View.INVISIBLE);
                 if (response.isSuccessful()) {
                     Log.d(TAG, "loadNews - onResponse isSuccessful");
                     newsList = response.body();
@@ -122,6 +136,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onFailure(Call<ArrayList<News>> call, Throwable t) {
+                mainPageProgressBar.setVisibility(View.INVISIBLE);
                 Log.d(TAG, "loadNews - onFailure: " + t.getMessage());
             }
         };
