@@ -25,7 +25,7 @@ public class FragmentNews extends Fragment {
 
     // Views
     View rootView;
-    public TextView textViewNewsHeadline;
+    public TextView textViewNewsTitle;
     public TextView textViewNewsBody;
     public TextView textViewNewsAuthors;
     public TextView textViewNewsPublishDate;
@@ -52,36 +52,35 @@ public class FragmentNews extends Fragment {
         findViews();
 
         if (news != null) {
-            textViewNewsHeadline.setText(news.getTitle());
-            textViewNewsBody.setText(news.getBody());
-
-            textViewNewsHeadline.setContentDescription(textViewNewsHeadline.getText());
-
-            textViewNewsBody.setContentDescription(textViewNewsBody.getText());
-            textViewNewsBody.setFocusableInTouchMode(true);
-            textViewNewsBody.setFocusable(true);
+            textViewNewsTitle.setText(news.getTitle());
 
             if (news.getAuthors().length > 0)
                 textViewNewsAuthors.setText(getString(R.string.news_authors, news.getAuthors()[0]));
             else
-                textViewNewsAuthors.setText(getString(R.string.news_authors, ""));
+                textViewNewsAuthors.setMaxHeight(0);
 
             textViewNewsPublishDate.setText(getString(R.string.news_publish_date, news.getPublishDate()));
-            
+
             if (news.getImageSrc() != null || news.getImageSrc().equals("")) {
                 Glide.with(rootView.getContext())
                         .load(news.getImageSrc())
                         .into(imageViewNewsImage);
             } else imageViewNewsImage.setMaxHeight(0);
 
+            textViewNewsBody.setText(news.getBody());
 
+            textViewNewsTitle.setContentDescription(textViewNewsTitle.getText());
+
+            textViewNewsTitle.setContentDescription(textViewNewsBody.getText());
+            textViewNewsTitle.setFocusableInTouchMode(true);
+            textViewNewsTitle.setFocusable(true);
         } else Log.d(TAG, "NEWS IS NULL");
 
         return rootView;
     }
 
     private void findViews() {
-        textViewNewsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_title));
+        textViewNewsTitle = ((TextView) rootView.findViewById(R.id.textView_news_title));
         textViewNewsBody = ((TextView) rootView.findViewById(R.id.textView_news_body));
         textViewNewsAuthors = (TextView) rootView.findViewById(R.id.textView_news_authors);
         textViewNewsPublishDate = (TextView) rootView.findViewById(R.id.textView_news_publish_date);
