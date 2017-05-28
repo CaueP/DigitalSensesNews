@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
      * @param category
      */
     private void loadNews(String language, String category) {
-        Log.d(TAG, "Called loadNews");
         Call<ArrayList<News>> newsCall = newsService.getNews(language, category);
 
         Callback<ArrayList<News>> newsCallback = new Callback<ArrayList<News>>() {
