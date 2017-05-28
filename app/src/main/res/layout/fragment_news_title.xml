@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/news_headline_description"
         android:text="TextView"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textSize="36sp"
         android:textStyle="bold"
         tools:text="Headline"
