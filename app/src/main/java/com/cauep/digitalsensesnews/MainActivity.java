@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
+import com.cauep.digitalsensesnews.fragment.FragmentNews;
 import com.cauep.digitalsensesnews.fragment.FragmentNewsPager;
 import com.cauep.digitalsensesnews.model.News;
 import com.cauep.digitalsensesnews.model.service.NewsService;
@@ -20,9 +22,9 @@ import retrofit2.Response;
  * @version 1.0
  *          Created on 05/27/2017
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+    implements FragmentNewsPager.OnListItemSelectedListener{
     final static String TAG = "MainPageActivity";
-
 
     // Create news API service
     NewsService newsService = ServiceGenerator.createService(NewsService.class);
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        loadNews("pt", "tech");
+        loadNews("en", "tech");
         //loadFakeNews("pt", "tech");
     }
 
@@ -82,6 +84,10 @@ public class MainActivity extends AppCompatActivity {
         newsCall.enqueue(newsCallback);
     }
 
+    /**
+     * Load News PagerView with the list of news
+     * @param newsList List of news
+     */
     private void loadNewsPager(ArrayList<News> newsList) {
 
         Fragment newsPagerFragment = new FragmentNewsPager();
@@ -93,7 +99,29 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, newsPagerFragment)
-                //.addToBackStack(null)        // add to back stack
+                .addToBackStack(null)        // add to back stack
                 .commit();
+    }
+
+    /**
+     * FragmentsNewPager Interface implementation
+     * @param itemPosition Item position on the list
+     */
+    @Override
+    public void onListItemSelected(int itemPosition) {
+        if(newsList != null) {
+            Fragment newsFragment = new FragmentNews();
+            if(newsList != null){
+                Bundle newsBundle = new Bundle();
+                newsBundle.putSerializable(Constants.KEY.NEWS, newsList.get(itemPosition));
+                newsFragment.setArguments(newsBundle);
+            }
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, newsFragment)
+                    .addToBackStack(null)        // add to back stack
+                    .commit();
+        }
+
     }
 }

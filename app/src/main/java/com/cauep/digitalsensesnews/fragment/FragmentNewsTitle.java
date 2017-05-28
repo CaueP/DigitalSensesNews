@@ -17,8 +17,8 @@ import com.cauep.digitalsensesnews.utils.Constants;
  * @version 1.0
  *          Created on 05/27/2017
  */
-public class FragmentNewsHeadline extends Fragment {
-    static final String TAG = "FragmentNewsHeadline";
+public class FragmentNewsTitle extends Fragment {
+    static final String TAG = "FragmentNewsTitle";
 
     // Views
     public TextView textViewNewsTitle;
@@ -53,6 +53,12 @@ public class FragmentNewsHeadline extends Fragment {
             textViewNewsTitle.setFocusable(true);
         } else Log.d(TAG, "NEWS IS NULL");
 
+//        textViewNewsTitle.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d(TAG, "CLICKED ON ON CLICK LISTENER");
+//            }
+//        });
 
         // Setting Tag to get this fragment on other activities
         rootView.setTag(newsIndex);

@@ -1,5 +1,6 @@
 package com.cauep.digitalsensesnews.fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 /**
  * @author Caue Garcia Polimanti
  * @version 1.0
- * Created on 05/27/2017
+ *          Created on 05/27/2017
  */
 
 public class FragmentNewsPager extends Fragment {
@@ -33,15 +34,31 @@ public class FragmentNewsPager extends Fragment {
 
     // Views
     View rootView = null;
-    Button buttonPrevious, buttonNext;
+    //Button buttonPrevious, buttonNext;
+    Button buttonRead;
 
     // Data
     ArrayList<News> newsList = null;
+
+    // Interface listener
+    OnListItemSelectedListener mListener;
 
     /**
      * Fragment constructor
      */
     public FragmentNewsPager() {
+    }
+
+    @Override
+    public void onAttach(Context context){
+        Log.d(TAG,"Entered in onAttach");
+        super.onAttach(context);
+        try {
+            mListener = (OnListItemSelectedListener) getActivity();
+        }catch (ClassCastException e) {
+            throw new ClassCastException(getActivity().toString() +
+                    "must implement OnListItemSelectedListener");
+        }
     }
 
     @Override
@@ -55,15 +72,15 @@ public class FragmentNewsPager extends Fragment {
 
         // Restore News from Bundle of arguments
         Bundle args = getArguments();
-        if(args != null) {
+        if (args != null) {
             newsList = (ArrayList<News>) args.getSerializable(Constants.KEY.NEWS_LIST);
-            if(mNewsPagerAdapter != null) mNewsPagerAdapter = null;
-        } else{
+            if (mNewsPagerAdapter != null) mNewsPagerAdapter = null;
+        } else {
             Log.d(TAG, "Bundle com lista de News vazio");
         }
 
 
-        if(newsList != null) {
+        if (newsList != null) {
             // ViewPager and its adapters use support library
             // fragments, so use getSupportFragmentManager.
             mNewsPagerAdapter =
@@ -85,6 +102,7 @@ public class FragmentNewsPager extends Fragment {
     private void findViews() {
 //        buttonPrevious = (Button) rootView.findViewById(R.id.button_previous);
 //        buttonNext = (Button) rootView.findViewById(R.id.button_next);
+        buttonRead = (Button) rootView.findViewById(R.id.button_read_news);
     }
 
     /**
@@ -93,6 +111,15 @@ public class FragmentNewsPager extends Fragment {
     private void setListeners() {
 
         // onClick Listeners
+        buttonRead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int currentPos = mViewPager.getCurrentItem();
+                Log.d(TAG, "Current Item position is: " + currentPos);
+                mListener.onListItemSelected(currentPos);
+            }
+        });
+
 //        buttonPrevious.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -134,33 +161,33 @@ public class FragmentNewsPager extends Fragment {
 
                 if (state == ViewPager.SCROLL_STATE_SETTLING)
                     //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_SETTLING");
-                if (state == ViewPager.SCROLL_STATE_DRAGGING)
-                    //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_DRAGGING");
+                    if (state == ViewPager.SCROLL_STATE_DRAGGING)
+                        //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_DRAGGING");
 
-                if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_IDLE");
-                    View currentView = mNewsPagerAdapter.getItem(mViewPager.getCurrentItem()).getView();
-                    //FragmentNewsHeadline frag = (FragmentNewsHeadline) mNewsPagerAdapter.getItem(mViewPager.getCurrentItem());
+                        if (state == ViewPager.SCROLL_STATE_IDLE) {
+                            Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_IDLE");
+                            View currentView = mNewsPagerAdapter.getItem(mViewPager.getCurrentItem()).getView();
+                            //FragmentNewsTitle frag = (FragmentNewsTitle) mNewsPagerAdapter.getItem(mViewPager.getCurrentItem());
 
 
-                    // trying to get from fragment
+                            // trying to get from fragment
 //                    View fragView = getActivity().getSupportFragmentManager().findFragmentByTag(Integer.toString(mViewPager.getCurrentItem()+1)).getView();
 //                    TextView textViewNewsHeadling = (TextView) fragView.findViewById(R.id.textView_news_headline);
 //                    String newsHeadline = textViewNewsHeadling.getText().toString();
 
-                    // getting from rootView
+                            // getting from rootView
 //                    TextView textViewNewsHeadling = (TextView) rootView.findViewById(R.id.textView_news_headline);
 //                    String newsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_headline)).getText().toString();
 
-                    // Show toast message
+                            // Show toast message
 //                    Toast.makeText(getActivity(), newsHeadline, Toast.LENGTH_LONG).show();
 //
 //                    textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
 //                    textViewNewsHeadling.setContentDescription(newsHeadline);
 //                    textViewNewsHeadling.setFocusableInTouchMode(true);
 //                    textViewNewsHeadling.setFocusable(true);
-                    checkNewsItemState();
-                }
+                            checkNewsItemState();
+                        }
             }
 
         });
@@ -179,5 +206,16 @@ public class FragmentNewsPager extends Fragment {
         if (mViewPager.getCurrentItem() == mNewsPagerAdapter.getCount() - 1) {
             Toast.makeText(getActivity(), R.string.msg_last_item, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * Interface implemented by MainActivity to call the news fragment
+     */
+    public interface OnListItemSelectedListener {
+        /**
+         * Method to send the news item selected
+         * @param itemPosition Item position on the list
+         */
+        public void onListItemSelected(int itemPosition);
     }
 }

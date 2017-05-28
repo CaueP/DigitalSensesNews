@@ -5,11 +5,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.cauep.digitalsensesnews.fragment.FragmentNewsHeadline;
+import com.cauep.digitalsensesnews.fragment.FragmentNewsTitle;
 import com.cauep.digitalsensesnews.model.News;
 import com.cauep.digitalsensesnews.utils.Constants;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +30,7 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int i) {
-        Fragment fragment = new FragmentNewsHeadline();
+        Fragment fragment = new FragmentNewsTitle();
         Bundle args = new Bundle();
 
         // Passing our News object to the fragment
