@@ -30,6 +30,7 @@ public class FragmentNewsTitle extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+        setRetainInstance(true);
         // The last two arguments ensure LayoutParams are inflated
         // properly.
         View rootView = inflater.inflate(
@@ -38,7 +39,7 @@ public class FragmentNewsTitle extends Fragment {
 
         if (args != null) {
             news = (News) args.getSerializable(Constants.KEY.NEWS);
-            newsIndex = "news" + Integer.toString(args.getInt(Constants.KEY.NEWS_ITEM_INDEX));
+            newsIndex = Integer.toString(args.getInt(Constants.KEY.NEWS_ITEM_INDEX));
         }
 
         Log.d(TAG, "News Index: " + newsIndex);
@@ -61,7 +62,7 @@ public class FragmentNewsTitle extends Fragment {
 //        });
 
         // Setting Tag to get this fragment on other activities
-        rootView.setTag(newsIndex);
+        rootView.setTag(TAG + newsIndex);
         return rootView;
     }
 }

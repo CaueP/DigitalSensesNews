@@ -50,12 +50,12 @@ public class FragmentNewsPager extends Fragment {
     }
 
     @Override
-    public void onAttach(Context context){
-        Log.d(TAG,"Entered in onAttach");
+    public void onAttach(Context context) {
+        Log.d(TAG, "Entered in onAttach");
         super.onAttach(context);
         try {
             mListener = (OnListItemSelectedListener) getActivity();
-        }catch (ClassCastException e) {
+        } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() +
                     "must implement OnListItemSelectedListener");
         }
@@ -92,6 +92,8 @@ public class FragmentNewsPager extends Fragment {
 
         findViews();
         setListeners();
+
+        rootView.setTag(TAG);
 
         return rootView;
     }
@@ -214,6 +216,7 @@ public class FragmentNewsPager extends Fragment {
     public interface OnListItemSelectedListener {
         /**
          * Method to send the news item selected
+         *
          * @param itemPosition Item position on the list
          */
         public void onListItemSelected(int itemPosition);

@@ -27,8 +27,8 @@ import retrofit2.Response;
  *          Created on 05/27/2017
  */
 public class MainActivity extends AppCompatActivity
-    implements FragmentNewsPager.OnListItemSelectedListener,
-        FragmentCategories.OnCategorySelectedListener{
+        implements FragmentNewsPager.OnListItemSelectedListener,
+        FragmentCategories.OnCategorySelectedListener {
     final static String TAG = "MainPageActivity";
 
     // Create news API service
@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity
     }
     */
 
-    private void loadCategories(){
+    private void loadCategories() {
         Call<ArrayList<Category>> categoriesCall = categoryService.getCategories();
 
         Callback<ArrayList<Category>> categoriesCallback = new Callback<ArrayList<Category>>() {
@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Load a news from web server
+     *
      * @param language
      * @param category
      */
@@ -123,21 +124,23 @@ public class MainActivity extends AppCompatActivity
     /**
      * Load the available categories on API
      */
-    private void loadCategoriesRV(){
+    private void loadCategoriesRV() {
+        Log.d(TAG, "loadCategoriesRV");
         Fragment categoriesFragment = new FragmentCategories();
-        if(newsList != null){
+        if (categoriesList != null) {
             Bundle menuBundle = new Bundle();
             menuBundle.putSerializable(Constants.KEY.CATEGORIES_LIST, categoriesList);
             categoriesFragment.setArguments(menuBundle);
             changeFragment(categoriesFragment);
-        }
+        } else Log.d(TAG, "loadCategoriesRV - categoriesList == null");
     }
 
     /**
      * Change fragment showed on main activity
+     *
      * @param fragment Fragment to be showed
      */
-    private void changeFragment(Fragment fragment){
+    private void changeFragment(Fragment fragment) {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
@@ -147,12 +150,13 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * Load News PagerView with the list of news
+     *
      * @param newsList List of news
      */
     private void loadNewsPager(ArrayList<News> newsList) {
 
         Fragment newsPagerFragment = new FragmentNewsPager();
-        if(newsList != null){
+        if (newsList != null) {
             Bundle menuBundle = new Bundle();
             menuBundle.putSerializable(Constants.KEY.NEWS_LIST, newsList);
             newsPagerFragment.setArguments(menuBundle);
@@ -162,13 +166,14 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * FragmentsNewPager Interface implementation
+     *
      * @param itemPosition Item position on the list
      */
     @Override
     public void onListItemSelected(int itemPosition) {
-        if(newsList != null) {
+        if (newsList != null) {
             Fragment newsFragment = new FragmentNews();
-            if(newsList != null){
+            if (newsList != null) {
                 Bundle newsBundle = new Bundle();
                 newsBundle.putSerializable(Constants.KEY.NEWS, newsList.get(itemPosition));
                 newsFragment.setArguments(newsBundle);
@@ -180,11 +185,12 @@ public class MainActivity extends AppCompatActivity
 
     /**
      * FragmentCategories Interface implementation
+     *
      * @param itemPosition Item position on the list
      */
     @Override
     public void onCategorySelected(int itemPosition) {
-        if (categoriesList!=null){
+        if (categoriesList != null) {
 
             loadNews("en", categoriesList.get(itemPosition).getCategory());
         }

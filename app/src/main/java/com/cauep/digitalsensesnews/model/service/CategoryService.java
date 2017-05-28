@@ -13,7 +13,6 @@ import retrofit2.http.GET;
  */
 
 public interface CategoryService {
-    // TODO: Transformar para Array de String
     @GET("news/categories")
     Call<ArrayList<Category>> getCategories();
 }

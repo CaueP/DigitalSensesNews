@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class FragmentCategories extends Fragment {
     final static String TAG = "FragmentCategories";
 
-    private ArrayList<Category> myItens = new ArrayList<>();
+    private ArrayList<Category> myItens = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +71,7 @@ public class FragmentCategories extends Fragment {
     public interface OnCategorySelectedListener {
         /**
          * Method to send the news item selected
+         *
          * @param itemPosition Item position on the list
          */
         void onCategorySelected(int itemPosition);
@@ -80,12 +81,12 @@ public class FragmentCategories extends Fragment {
     public OnCategorySelectedListener mListener;
 
     @Override
-    public void onAttach(Context context){
-        Log.d(TAG,"Entered in onAttach");
+    public void onAttach(Context context) {
+        Log.d(TAG, "Entered in onAttach");
         super.onAttach(context);
         try {
             mListener = (FragmentCategories.OnCategorySelectedListener) getActivity();
-        }catch (ClassCastException e) {
+        } catch (ClassCastException e) {
             throw new ClassCastException(getActivity().toString() +
                     "must implement OnListItemSelectedListener");
         }
