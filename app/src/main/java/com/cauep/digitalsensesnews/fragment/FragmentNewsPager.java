@@ -95,9 +95,6 @@ public class FragmentNewsPager extends Fragment {
         setListeners();
 
         rootView.setTag(TAG);
-        mViewPager.setContentDescription("Exibindo as notícias. Deslize os dedos para a esquerda para selecionar a próxima notícia");
-        rootView.setFocusable(true);
-        rootView.setFocusableInTouchMode(true);
         return rootView;
     }
 
@@ -164,35 +161,37 @@ public class FragmentNewsPager extends Fragment {
             public void onPageScrollStateChanged(int state) {
                 Log.d(TAG, "onPageScrollStateChanged");
 
-                if (state == ViewPager.SCROLL_STATE_SETTLING)
-                    //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_SETTLING");
-                    if (state == ViewPager.SCROLL_STATE_DRAGGING)
-                        //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_DRAGGING");
+                if (state == ViewPager.SCROLL_STATE_SETTLING) {
+                }
+                //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_SETTLING");
+                if (state == ViewPager.SCROLL_STATE_DRAGGING) {
+                }
+                //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_DRAGGING");
 
-                        if (state == ViewPager.SCROLL_STATE_IDLE) {
-                            Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_IDLE");
+                if (state == ViewPager.SCROLL_STATE_IDLE) {
+                    Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_IDLE");
 //                            View currentView = mNewsPagerAdapter.getItem(mViewPager.getCurrentItem()).getView();
-                            //FragmentNewsTitle frag = (FragmentNewsTitle) mNewsPagerAdapter.getItem(mViewPager.getCurrentItem());
+                    //FragmentNewsTitle frag = (FragmentNewsTitle) mNewsPagerAdapter.getItem(mViewPager.getCurrentItem());
 
 
-                            // trying to get from fragment
+                    // trying to get from fragment
 //                    View fragView = getActivity().getSupportFragmentManager().findFragmentByTag(Integer.toString(mViewPager.getCurrentItem()+1)).getView();
 //                    TextView textViewNewsHeadling = (TextView) fragView.findViewById(R.id.textView_news_headline);
 //                    String newsHeadline = textViewNewsHeadling.getText().toString();
 
-                            // getting from rootView
+                    // getting from rootView
                     TextView textViewNewsHeadling = (TextView) rootView.findViewById(R.id.textView_news_title);
                     String newsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_title)).getText().toString();
 
-                            // Show toast message
+                    // Show toast message
 //                    Toast.makeText(getActivity(), newsHeadline, Toast.LENGTH_LONG).show();
-//
+
                     textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
                     textViewNewsHeadling.setContentDescription(newsHeadline);
                     textViewNewsHeadling.setFocusableInTouchMode(true);
                     textViewNewsHeadling.setFocusable(true);
-                            checkNewsItemState();
-                        }
+                    checkNewsItemState();
+                }
             }
 
         });
