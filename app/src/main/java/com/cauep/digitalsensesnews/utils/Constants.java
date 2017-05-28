@@ -12,6 +12,14 @@ public class Constants {
         public static final String API_URL = "https://dsnewsbackend.mybluemix.net/api/";
     }
 
+    public class CATEGORY {
+        public static final String SPORTS = "sports";
+        public static final String ECONOMY = "economy";
+        public static final String HEALTH = "health";
+        public static final String TECH = "tech";
+        public static final String LAST_NEWS = "last_news";
+    }
+
     public class KEY {
         public static final String NEWS = "news";
         public static final String NEWS_LIST = "news_list";

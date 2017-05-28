@@ -48,7 +48,7 @@ public class FragmentNewsTitle extends Fragment {
 
         if (news != null) {
             textViewNewsTitle.setText(news.getTitle());
-            rootView.setContentDescription(textViewNewsTitle.getText());
+            //rootView.setContentDescription(textViewNewsTitle.getText());
             textViewNewsTitle.setContentDescription(textViewNewsTitle.getText());
             textViewNewsTitle.setFocusableInTouchMode(true);
             textViewNewsTitle.setFocusable(true);

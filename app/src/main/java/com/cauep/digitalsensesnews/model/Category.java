@@ -1,5 +1,7 @@
 package com.cauep.digitalsensesnews.model;
 
+import android.content.res.Resources;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 

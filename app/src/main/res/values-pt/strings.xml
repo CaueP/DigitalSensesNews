@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notícias Sentidos Digitais</string>
+    <string name="btn_read_news_description">Ler</string>
+    <string name="btn_read_news_text">Ler</string>
+    <string name="categories_list_description">Lista de categorias</string>
+    <string name="category_description">Categoria %s</string>
+    <string name="msg_first_item">Esta é a primeira notícia</string>
+    <string name="msg_last_item">Esta é a última notícia</string>
+    <string name="news_headline_description">Título da notícia</string>
+    <string name="categories_economy">Economia</string>
+    <string name="categories_health">Saúde</string>
+    <string name="categories_sports">Esportes</string>
+    <string name="categories_tech">Tecnologia</string>
+    <string name="categories_last_news">Últimas notícias</string>
+</resources>

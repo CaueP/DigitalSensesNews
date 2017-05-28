@@ -16,6 +16,7 @@ import com.cauep.digitalsensesnews.utils.Constants;
 import com.cauep.digitalsensesnews.utils.ServiceGenerator;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,13 +36,20 @@ public class MainActivity extends AppCompatActivity
     NewsService newsService = ServiceGenerator.createService(NewsService.class);
     CategoryService categoryService = ServiceGenerator.createService(CategoryService.class);
 
+    // Data
     ArrayList<News> newsList = null;
     ArrayList<Category> categoriesList = null;
+    String systemLanguage = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        systemLanguage = Locale.getDefault().getLanguage();
+        Log.d(TAG, "==========A LINGUAGEM ATUAL É: " + systemLanguage);
+        Log.d(TAG,"getISO3Language:  " + Locale.getDefault().getISO3Language());
+        Log.d(TAG,"getDisplayLanguage:  " + Locale.getDefault().getDisplayLanguage());
 
         loadCategories();
         //loadFakeNews("pt", "tech");
@@ -190,9 +198,8 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public void onCategorySelected(int itemPosition) {
-        if (categoriesList != null) {
-
-            loadNews("en", categoriesList.get(itemPosition).getCategory());
+        if (categoriesList != null && systemLanguage != null) {
+            loadNews(systemLanguage, categoriesList.get(itemPosition).getCategory());
         }
     }
 }

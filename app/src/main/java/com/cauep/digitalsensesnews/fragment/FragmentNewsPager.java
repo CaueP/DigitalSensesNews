@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cauep.digitalsensesnews.R;
@@ -94,7 +95,9 @@ public class FragmentNewsPager extends Fragment {
         setListeners();
 
         rootView.setTag(TAG);
-
+        mViewPager.setContentDescription("Exibindo as notícias. Deslize os dedos para a esquerda para selecionar a próxima notícia");
+        rootView.setFocusable(true);
+        rootView.setFocusableInTouchMode(true);
         return rootView;
     }
 
@@ -168,7 +171,7 @@ public class FragmentNewsPager extends Fragment {
 
                         if (state == ViewPager.SCROLL_STATE_IDLE) {
                             Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_IDLE");
-                            View currentView = mNewsPagerAdapter.getItem(mViewPager.getCurrentItem()).getView();
+//                            View currentView = mNewsPagerAdapter.getItem(mViewPager.getCurrentItem()).getView();
                             //FragmentNewsTitle frag = (FragmentNewsTitle) mNewsPagerAdapter.getItem(mViewPager.getCurrentItem());
 
 
@@ -178,16 +181,16 @@ public class FragmentNewsPager extends Fragment {
 //                    String newsHeadline = textViewNewsHeadling.getText().toString();
 
                             // getting from rootView
-//                    TextView textViewNewsHeadling = (TextView) rootView.findViewById(R.id.textView_news_headline);
-//                    String newsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_headline)).getText().toString();
+                    TextView textViewNewsHeadling = (TextView) rootView.findViewById(R.id.textView_news_title);
+                    String newsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_title)).getText().toString();
 
                             // Show toast message
 //                    Toast.makeText(getActivity(), newsHeadline, Toast.LENGTH_LONG).show();
 //
-//                    textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
-//                    textViewNewsHeadling.setContentDescription(newsHeadline);
-//                    textViewNewsHeadling.setFocusableInTouchMode(true);
-//                    textViewNewsHeadling.setFocusable(true);
+                    textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
+                    textViewNewsHeadling.setContentDescription(newsHeadline);
+                    textViewNewsHeadling.setFocusableInTouchMode(true);
+                    textViewNewsHeadling.setFocusable(true);
                             checkNewsItemState();
                         }
             }

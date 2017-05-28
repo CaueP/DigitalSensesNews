@@ -1,6 +1,7 @@
 package com.cauep.digitalsensesnews.fragment;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.cauep.digitalsensesnews.R;
+import com.cauep.digitalsensesnews.controller.CategoryItemAdapter;
 import com.cauep.digitalsensesnews.model.Category;
 import com.cauep.digitalsensesnews.utils.Constants;
 
@@ -57,9 +59,8 @@ public class FragmentCategories extends Fragment {
         }
 
         // Custom adapter
-        CategoryItemAdapter adapter = new CategoryItemAdapter(myItens, mListener);
+        CategoryItemAdapter adapter = new CategoryItemAdapter(myItens, mListener, getResources());
         mRecyclerView.setAdapter(adapter);
-
 
         return v;
     }

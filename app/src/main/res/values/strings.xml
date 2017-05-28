@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">DigitalSensesNews</string>
-    <string name="msg_last_item">This is the last item</string>
-    <string name="msg_first_item">This is the first item</string>
+    <string name="msg_last_item">This is the last news</string>
+    <string name="msg_first_item">This is the first news</string>
     <string name="news_headline_description">News title</string>
 
-    <string name="category_description">Click here to choose %s category</string>
+    <string name="category_description">%s category</string>
+    <string name="categories_list_description">Categories list</string>
+    <string name="btn_read_news_description">Read</string>
+    <string name="btn_read_news_text">Read</string>
+    <string name="categories_sports">Sports</string>
+    <string name="categories_economy">Economy</string>
+    <string name="categories_health">Health</string>
+    <string name="categories_tech">Technology</string>
+    <string name="categories_last_news">Last news</string>
 
 </resources>

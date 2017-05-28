@@ -5,10 +5,10 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/category_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/category_rv"
-        >
+        android:contentDescription="@string/categories_list_description">
 
     </android.support.v7.widget.RecyclerView>
 

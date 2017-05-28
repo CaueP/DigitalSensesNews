@@ -1,5 +1,6 @@
-package com.cauep.digitalsensesnews.fragment;
+package com.cauep.digitalsensesnews.controller;
 
+import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.cauep.digitalsensesnews.R;
+import com.cauep.digitalsensesnews.fragment.FragmentCategories;
 import com.cauep.digitalsensesnews.model.Category;
+import com.cauep.digitalsensesnews.utils.Constants;
 
 import java.util.ArrayList;
 
@@ -17,6 +20,7 @@ import java.util.ArrayList;
 
 public class CategoryItemAdapter extends RecyclerView.Adapter<CategoryItemAdapter.ItemViewHolder> {
 
+    private final Resources resources;
     private ArrayList<Category> myItens;
     private FragmentCategories.OnCategorySelectedListener mListener;
 
@@ -42,9 +46,10 @@ public class CategoryItemAdapter extends RecyclerView.Adapter<CategoryItemAdapte
     }
 
     // Constructor
-    public CategoryItemAdapter(ArrayList<Category> myItens, FragmentCategories.OnCategorySelectedListener mListener){
+    public CategoryItemAdapter(ArrayList<Category> myItens, FragmentCategories.OnCategorySelectedListener mListener, Resources res){
         this.myItens = myItens;
         this.mListener = mListener;
+        this.resources = res;
     }
 
     @Override
@@ -60,8 +65,34 @@ public class CategoryItemAdapter extends RecyclerView.Adapter<CategoryItemAdapte
     @Override
     public void onBindViewHolder(ItemViewHolder itemViewHolder, int position) {
         Category item = myItens.get(position);
-        itemViewHolder.title.setText(item.getCategory());
-        itemViewHolder.title.setContentDescription(item.getDescription());
+
+        // Build category name adapted accordingly to the system language
+        String categoryName;
+        switch (item.getCategory()) {
+            case Constants.CATEGORY.SPORTS:
+                categoryName = resources.getString(R.string.categories_sports);
+                break;
+            case Constants.CATEGORY.ECONOMY:
+                categoryName = resources.getString(R.string.categories_economy);
+                break;
+            case Constants.CATEGORY.HEALTH:
+                categoryName = resources.getString(R.string.categories_health);
+                break;
+            case Constants.CATEGORY.TECH:
+                categoryName = resources.getString(R.string.categories_tech);
+                break;
+            case Constants.CATEGORY.LAST_NEWS:
+                categoryName = resources.getString(R.string.categories_last_news);
+                break;
+            default:
+                categoryName = "";
+                break;
+        }
+        itemViewHolder.title.setText(categoryName);
+
+        // Build category accessible description adapted accordingly to the system language
+        String description = resources.getString(R.string.category_description, categoryName);
+        itemViewHolder.title.setContentDescription(description);
     }
 
     @Override
