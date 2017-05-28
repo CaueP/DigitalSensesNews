@@ -22,4 +22,8 @@ public class Category implements Serializable{
     public String getCategory() {
         return category;
     }
+
+    public String getDescription(){
+        return "Click here to choose " + category + " category";
+    }
 }
