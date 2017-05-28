@@ -47,7 +47,7 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return "OBJECT " + (position + 1);
+        return newsList.get(position).getTitle();
     }
 
 }

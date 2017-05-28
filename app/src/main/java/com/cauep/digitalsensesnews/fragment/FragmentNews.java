@@ -36,6 +36,9 @@ public class FragmentNews extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
+
+        Log.d(TAG, "Entered in onCreateView");
+        setRetainInstance(true);
         // The last two arguments ensure LayoutParams are inflated
         // properly.
         rootView = inflater.inflate(

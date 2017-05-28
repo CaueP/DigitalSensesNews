@@ -89,14 +89,40 @@ public class FragmentNewsPager extends Fragment {
                             getActivity().getSupportFragmentManager(), newsList);
             mViewPager = (ViewPager) rootView.findViewById(R.id.pager_news);
             mViewPager.setAdapter(mNewsPagerAdapter);
+
+            //mViewPager.setAdapter(new SimpleFragmentStatePagerAdapter(getChildFragmentManager(),mParentString));
         }
 
         findViews();
         setListeners();
+        checkNewsItemState();
+        //readNewsForUser();
 
         rootView.setTag(TAG);
         return rootView;
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart");
+    }
+    String mParentString;
+    @Override
+    public void onResume() {
+        Log.d(TAG, "onResume");
+//        mParentString = getArguments().getString(Constants.KEY.ARG_PARENTS);
+//        ViewPager viewPager = (ViewPager) getView().findViewById(R.id.pager_news);
+        //viewPager.setAdapter(new SimpleFragmentStatePagerAdapter(getFragmentManager(),mParentString));
+        super.onResume();
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState){
+        super.onActivityCreated(savedInstanceState);
+        Log.d(TAG, "onActivityCreated");
+    }
+
 
     /**
      * Find all the views on the page and attach to the view variables
@@ -162,11 +188,13 @@ public class FragmentNewsPager extends Fragment {
                 Log.d(TAG, "onPageScrollStateChanged");
 
                 if (state == ViewPager.SCROLL_STATE_SETTLING) {
+                    Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_SETTLING");
                 }
-                //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_SETTLING");
                 if (state == ViewPager.SCROLL_STATE_DRAGGING) {
+                    Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_DRAGGING");
+                    rootView.setFocusableInTouchMode(false);
+                    rootView.setFocusable(false);
                 }
-                //Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_DRAGGING");
 
                 if (state == ViewPager.SCROLL_STATE_IDLE) {
                     Log.d(TAG, "onPageScrollStateChanged SCROLL_STATE_IDLE");
@@ -179,24 +207,29 @@ public class FragmentNewsPager extends Fragment {
 //                    TextView textViewNewsHeadling = (TextView) fragView.findViewById(R.id.textView_news_headline);
 //                    String newsHeadline = textViewNewsHeadling.getText().toString();
 
-                    // getting from rootView
-                    TextView textViewNewsHeadling = (TextView) rootView.findViewById(R.id.textView_news_title);
-                    String newsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_title)).getText().toString();
+                    readNewsForUser();
 
-                    // Show toast message
-//                    Toast.makeText(getActivity(), newsHeadline, Toast.LENGTH_LONG).show();
-
-                    textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
-                    textViewNewsHeadling.setContentDescription(newsHeadline);
-                    textViewNewsHeadling.setFocusableInTouchMode(true);
-                    textViewNewsHeadling.setFocusable(true);
                     checkNewsItemState();
                 }
             }
-
         });
+    }
 
+    /**
+     * Read news for the user when talkback is activate
+     */
+    public void readNewsForUser() {
+        // getting from rootView
+        TextView textViewNewsHeadling = (TextView) rootView.findViewById(R.id.textView_news_title);
+        String newsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_title)).getText().toString();
 
+        // Show toast message
+//                    Toast.makeText(getActivity(), newsHeadline, Toast.LENGTH_LONG).show();
+        Log.d(TAG, mViewPager.getCurrentItem() + " - newsHeadline: " + newsHeadline);
+        //textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
+        rootView.setContentDescription(newsHeadline);
+        rootView.setFocusableInTouchMode(true);
+        rootView.setFocusable(true);
     }
 
     /**
@@ -221,6 +254,6 @@ public class FragmentNewsPager extends Fragment {
          *
          * @param itemPosition Item position on the list
          */
-        public void onListItemSelected(int itemPosition);
+        void onListItemSelected(int itemPosition);
     }
 }

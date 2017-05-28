@@ -25,5 +25,6 @@ public class Constants {
         public static final String NEWS_LIST = "news_list";
         public static final String NEWS_ITEM_INDEX = "news_index";
         public static final String CATEGORIES_LIST = "categories_list";
+        public static final String ARG_PARENTS = "Parents";
     }
 }
