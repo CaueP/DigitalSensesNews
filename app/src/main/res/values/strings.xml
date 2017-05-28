@@ -3,4 +3,7 @@
     <string name="msg_last_item">This is the last item</string>
     <string name="msg_first_item">This is the first item</string>
     <string name="news_headline_description">News title</string>
+
+    <string name="category_description">Click here to choose %s category</string>
+
 </resources>
