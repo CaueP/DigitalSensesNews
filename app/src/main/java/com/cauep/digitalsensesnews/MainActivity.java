@@ -5,9 +5,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.cauep.digitalsensesnews.fragment.FragmentCategories;
 import com.cauep.digitalsensesnews.fragment.FragmentNews;
 import com.cauep.digitalsensesnews.fragment.FragmentNewsPager;
+import com.cauep.digitalsensesnews.model.Category;
 import com.cauep.digitalsensesnews.model.News;
+import com.cauep.digitalsensesnews.model.service.CategoryService;
 import com.cauep.digitalsensesnews.model.service.NewsService;
 import com.cauep.digitalsensesnews.utils.Constants;
 import com.cauep.digitalsensesnews.utils.ServiceGenerator;
@@ -23,24 +26,27 @@ import retrofit2.Response;
  *          Created on 05/27/2017
  */
 public class MainActivity extends AppCompatActivity
-    implements FragmentNewsPager.OnListItemSelectedListener{
+    implements FragmentNewsPager.OnListItemSelectedListener,
+        FragmentCategories.OnCategorySelectedListener{
     final static String TAG = "MainPageActivity";
 
     // Create news API service
     NewsService newsService = ServiceGenerator.createService(NewsService.class);
+    CategoryService categoryService = ServiceGenerator.createService(CategoryService.class);
 
     ArrayList<News> newsList = null;
+    ArrayList<Category> categoriesList = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        loadNews("en", "tech");
+        loadCategories();
         //loadFakeNews("pt", "tech");
     }
 
+    /*
     private void loadFakeNews(String language, String category){
         ArrayList<News> newsFakeList = new ArrayList<News>();
 
@@ -49,6 +55,35 @@ public class MainActivity extends AppCompatActivity
                 new News(i + " Pelé namora xuxa", "Pelé declara seu amor por xuxa e a loira corresponde.", "20/02/1970 - 10:40"));
 
         loadNewsPager(newsFakeList);
+    }
+    */
+
+    private void loadCategories(){
+        Call<ArrayList<Category>> categoriesCall = categoryService.getCategories();
+
+        Callback<ArrayList<Category>> categoriesCallback = new Callback<ArrayList<Category>>() {
+            @Override
+            public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
+
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "loadCategories - onResponse isSuccessful");
+                    categoriesList = response.body();
+
+                    if (categoriesList == null) {
+                        Log.d(TAG, "loadCategories - Body: " + response.body());
+                    } else {
+                        loadCategoriesRV();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<Category>> call, Throwable t) {
+                Log.d(TAG, "loadCategories - onFailure: " + t.getMessage());
+            }
+        };
+
+        categoriesCall.enqueue(categoriesCallback);
     }
 
     /**
@@ -84,6 +119,24 @@ public class MainActivity extends AppCompatActivity
         newsCall.enqueue(newsCallback);
     }
 
+    private void loadCategoriesRV(){
+        Fragment categoriesFragment = new FragmentCategories();
+        if(newsList != null){
+            Bundle menuBundle = new Bundle();
+            menuBundle.putSerializable(Constants.KEY.CATEGORIES_LIST, categoriesList);
+            categoriesFragment.setArguments(menuBundle);
+            changeFragment(categoriesFragment);
+        }
+    }
+
+    private void changeFragment(Fragment fragment){
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)        // add to back stack
+                .commit();
+    }
+
     /**
      * Load News PagerView with the list of news
      * @param newsList List of news
@@ -95,12 +148,8 @@ public class MainActivity extends AppCompatActivity
             Bundle menuBundle = new Bundle();
             menuBundle.putSerializable(Constants.KEY.NEWS_LIST, newsList);
             newsPagerFragment.setArguments(menuBundle);
+            changeFragment(newsPagerFragment);
         }
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragment_container, newsPagerFragment)
-                .addToBackStack(null)        // add to back stack
-                .commit();
     }
 
     /**
@@ -115,13 +164,17 @@ public class MainActivity extends AppCompatActivity
                 Bundle newsBundle = new Bundle();
                 newsBundle.putSerializable(Constants.KEY.NEWS, newsList.get(itemPosition));
                 newsFragment.setArguments(newsBundle);
+                changeFragment(newsFragment);
             }
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragment_container, newsFragment)
-                    .addToBackStack(null)        // add to back stack
-                    .commit();
         }
 
+    }
+
+    @Override
+    public void onCategorySelected(int itemPosition) {
+        if (categoriesList!=null){
+
+            loadNews("en", categoriesList.get(itemPosition).getTitle());
+        }
     }
 }

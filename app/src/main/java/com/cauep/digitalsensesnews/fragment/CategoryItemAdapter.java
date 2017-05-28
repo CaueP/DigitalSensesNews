@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public class CategoryItemAdapter extends RecyclerView.Adapter<CategoryItemAdapter.ItemViewHolder> {
 
     private ArrayList<Category> myItens;
+    private FragmentCategories.OnCategorySelectedListener mListener;
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -25,17 +26,25 @@ public class CategoryItemAdapter extends RecyclerView.Adapter<CategoryItemAdapte
     public static class ItemViewHolder extends RecyclerView.ViewHolder{
         TextView title;
 
-        public ItemViewHolder(final View itemView) {
+        public ItemViewHolder(final View itemView, final FragmentCategories.OnCategorySelectedListener mListener) {
             super(itemView);
 
             title = (TextView)itemView.findViewById(R.id.txt_category);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mListener.onCategorySelected(getLayoutPosition());
+                }
+            });
 
         }
     }
 
     // Constructor
-    public CategoryItemAdapter(ArrayList<Category> myItens){
+    public CategoryItemAdapter(ArrayList<Category> myItens, FragmentCategories.OnCategorySelectedListener mListener){
         this.myItens = myItens;
+        this.mListener = mListener;
     }
 
     @Override
@@ -43,7 +52,8 @@ public class CategoryItemAdapter extends RecyclerView.Adapter<CategoryItemAdapte
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_category, viewGroup, false);
 
-        ItemViewHolder ivh = new ItemViewHolder(v);
+
+        ItemViewHolder ivh = new ItemViewHolder(v, mListener);
         return ivh;
     }
 
