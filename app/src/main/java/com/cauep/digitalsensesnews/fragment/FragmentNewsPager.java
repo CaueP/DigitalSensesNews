@@ -227,9 +227,13 @@ public class FragmentNewsPager extends Fragment {
 //                    Toast.makeText(getActivity(), newsHeadline, Toast.LENGTH_LONG).show();
         Log.d(TAG, mViewPager.getCurrentItem() + " - newsHeadline: " + newsHeadline);
         //textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
-        rootView.setContentDescription(newsHeadline);
-        rootView.setFocusableInTouchMode(true);
-        rootView.setFocusable(true);
+//        textViewNewsHeadling.setContentDescription(newsHeadline);
+//        textViewNewsHeadling.setFocusableInTouchMode(true);
+//        textViewNewsHeadling.setFocusable(true);
+
+        textViewNewsHeadling.getRootView().setContentDescription(newsHeadline);
+        textViewNewsHeadling.getRootView().setFocusableInTouchMode(true);
+        textViewNewsHeadling.getRootView().setFocusable(true);
     }
 
     /**

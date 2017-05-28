@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.cauep.digitalsensesnews.R;
 import com.cauep.digitalsensesnews.model.News;
 import com.cauep.digitalsensesnews.utils.Constants;
@@ -65,9 +66,14 @@ public class FragmentNews extends Fragment {
             else
                 textViewNewsAuthors.setText(getString(R.string.news_authors, ""));
 
-            textViewNewsPublishDate.setText(getString(R.string.news_publish_date,news.getPublishDate()));
+            textViewNewsPublishDate.setText(getString(R.string.news_publish_date, news.getPublishDate()));
+            
+            if (news.getImageSrc() != null || news.getImageSrc().equals("")) {
+                Glide.with(rootView.getContext())
+                        .load(news.getImageSrc())
+                        .into(imageViewNewsImage);
+            } else imageViewNewsImage.setMaxHeight(0);
 
-            //TODO: set image content on imageViewNewsImage
 
         } else Log.d(TAG, "NEWS IS NULL");
 
