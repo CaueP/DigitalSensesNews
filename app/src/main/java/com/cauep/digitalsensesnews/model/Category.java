@@ -1,7 +1,5 @@
 package com.cauep.digitalsensesnews.model;
 
-import android.content.res.Resources;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -25,7 +23,4 @@ public class Category implements Serializable{
         return category;
     }
 
-    public String getDescription(){
-        return "Click here to choose " + category + " category";
-    }
 }

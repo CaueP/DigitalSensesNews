@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cauep.digitalsensesnews.R;
@@ -25,6 +26,9 @@ public class FragmentNews extends Fragment {
     View rootView;
     public TextView textViewNewsHeadline;
     public TextView textViewNewsBody;
+    public TextView textViewNewsAuthors;
+    public TextView textViewNewsPublishDate;
+    public ImageView imageViewNewsImage;
 
     public FragmentNews() {
     }
@@ -52,6 +56,16 @@ public class FragmentNews extends Fragment {
             textViewNewsBody.setContentDescription(textViewNewsBody.getText());
             textViewNewsBody.setFocusableInTouchMode(true);
             textViewNewsBody.setFocusable(true);
+
+            if (news.getAuthors().length > 0)
+                textViewNewsAuthors.setText(getString(R.string.news_authors, news.getAuthors()[0]));
+            else
+                textViewNewsAuthors.setText(getString(R.string.news_authors, ""));
+
+            textViewNewsPublishDate.setText(getString(R.string.news_publish_date,news.getPublishDate()));
+
+            //TODO: set image content on imageViewNewsImage
+
         } else Log.d(TAG, "NEWS IS NULL");
 
         return rootView;
@@ -60,5 +74,8 @@ public class FragmentNews extends Fragment {
     private void findViews() {
         textViewNewsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_title));
         textViewNewsBody = ((TextView) rootView.findViewById(R.id.textView_news_body));
+        textViewNewsAuthors = (TextView) rootView.findViewById(R.id.textView_news_authors);
+        textViewNewsPublishDate = (TextView) rootView.findViewById(R.id.textView_news_publish_date);
+        imageViewNewsImage = (ImageView) rootView.findViewById(R.id.imageView_news_image);
     }
 }

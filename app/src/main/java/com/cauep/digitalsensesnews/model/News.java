@@ -22,14 +22,26 @@ public class News implements Serializable{
     private String body;
 
     @Expose
+    @SerializedName("top_image")
+    private String imageSrc;
+
+    @Expose
     @SerializedName("publish_date")
-    private String date;
+    private String publishDate;
+
+    @Expose
+    @SerializedName("authors")
+    private String[] authors;
 
     // Constructor
-    public News(String title, String body, String date) {
+    public News(String title, String body,
+                String imageSrc, String publishDate,
+                String[] authors) {
         this.title = title;
         this.body = body;
-        this.date = date;
+        this.imageSrc = imageSrc;
+        this.publishDate = publishDate;
+        this.authors = authors;
     }
 
     // Getters and Setters
@@ -37,23 +49,20 @@ public class News implements Serializable{
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getBody() {
         return body;
     }
 
-    public void setBody(String body) {
-        this.body = body;
+    public String getImageSrc() {
+        return imageSrc;
     }
 
-    public String getDate() {
-        return date;
+    public String getPublishDate(){
+        return publishDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public String[] getAuthors(){
+        return authors;
     }
+
 }
