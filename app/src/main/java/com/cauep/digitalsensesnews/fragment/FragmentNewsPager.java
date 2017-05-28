@@ -2,23 +2,21 @@ package com.cauep.digitalsensesnews.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ShareCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.cauep.digitalsensesnews.R;
 import com.cauep.digitalsensesnews.controller.NewsPagerAdapter;
 import com.cauep.digitalsensesnews.model.News;
+import com.cauep.digitalsensesnews.utils.Constants;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
 
-import java.util.List;
 
 /**
  * @author Caue Garcia Polimanti
@@ -37,6 +35,9 @@ public class FragmentNewsPager extends Fragment {
     View rootView = null;
     Button buttonPrevious, buttonNext;
 
+    // Data
+    ArrayList<News> newsList = null;
+
     /**
      * Fragment constructor
      */
@@ -52,13 +53,25 @@ public class FragmentNewsPager extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_news_pager, container, false);
 
-        // ViewPager and its adapters use support library
-        // fragments, so use getSupportFragmentManager.
-        mNewsPagerAdapter =
-                new NewsPagerAdapter(
-                        getActivity().getSupportFragmentManager());
-        mViewPager = (ViewPager) rootView.findViewById(R.id.pager_news);
-        mViewPager.setAdapter(mNewsPagerAdapter);
+        // Restore News from Bundle of arguments
+        Bundle args = getArguments();
+        if(args != null) {
+            newsList = (ArrayList<News>) args.getSerializable(Constants.KEY.NEWS_LIST);
+            if(mNewsPagerAdapter != null) mNewsPagerAdapter = null;
+        } else{
+            Log.d(TAG, "Bundle com lista de News vazio");
+        }
+
+
+        if(newsList != null) {
+            // ViewPager and its adapters use support library
+            // fragments, so use getSupportFragmentManager.
+            mNewsPagerAdapter =
+                    new NewsPagerAdapter(
+                            getActivity().getSupportFragmentManager(), newsList);
+            mViewPager = (ViewPager) rootView.findViewById(R.id.pager_news);
+            mViewPager.setAdapter(mNewsPagerAdapter);
+        }
 
         findViews();
         setListeners();

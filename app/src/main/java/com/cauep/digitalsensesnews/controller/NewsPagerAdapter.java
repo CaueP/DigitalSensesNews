@@ -6,6 +6,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.cauep.digitalsensesnews.fragment.FragmentNewsHeadline;
+import com.cauep.digitalsensesnews.model.News;
+import com.cauep.digitalsensesnews.utils.Constants;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * @author Caue Garcia Polimanti
  * @version 1.0
@@ -16,23 +22,28 @@ import com.cauep.digitalsensesnews.fragment.FragmentNewsHeadline;
 // and NOT a FragmentPagerAdapter.
 public class NewsPagerAdapter extends FragmentStatePagerAdapter {
 
-    public NewsPagerAdapter(FragmentManager fm) {
+    ArrayList<News> newsList = null;
+
+    public NewsPagerAdapter(FragmentManager fm, ArrayList<News> newsList) {
         super(fm);
+        this.newsList = newsList;
     }
 
     @Override
     public Fragment getItem(int i) {
         Fragment fragment = new FragmentNewsHeadline();
         Bundle args = new Bundle();
-        // Our object is just an integer :-P
-        args.putInt(FragmentNewsHeadline.ARG_OBJECT, i + 1);
+
+        // Passing our News object to the fragment
+        args.putSerializable(Constants.KEY.NEWS, newsList.get(i));
+        args.putInt(Constants.KEY.NEWS_ITEM_INDEX, i);
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public int getCount() {
-        return 5;
+        return newsList.size();
     }
 
     @Override

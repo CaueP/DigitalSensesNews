@@ -2,6 +2,7 @@ package com.cauep.digitalsensesnews.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,14 +25,6 @@ public class FragmentNews extends Fragment {
     View rootView;
     public TextView textViewNewsHeadline;
     public TextView textViewNewsBody;
-
-    public static FragmentNews newInstance(News news) {
-        FragmentNews fragment = new FragmentNews();
-        Bundle args = new Bundle();
-        args.putSerializable(Constants.KEY.NEWS, news);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public FragmentNews() {
     }
@@ -59,7 +52,7 @@ public class FragmentNews extends Fragment {
             textViewNewsBody.setContentDescription(textViewNewsBody.getText());
             textViewNewsBody.setFocusableInTouchMode(true);
             textViewNewsBody.setFocusable(true);
-        }
+        } else Log.d(TAG, "NEWS IS NULL");
 
         return rootView;
     }

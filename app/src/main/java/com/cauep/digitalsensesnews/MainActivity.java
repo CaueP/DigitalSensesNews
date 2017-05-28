@@ -35,11 +35,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        loadNews("pt", "tech");
+        //loadNews("pt", "tech");
+        loadFakeNews("pt", "tech");
     }
 
     private void loadFakeNews(String language, String category){
+        ArrayList<News> newsFakeList = new ArrayList<News>();
 
+        for(int i = 0; i < 5; i++)
+        newsFakeList.add(
+                new News(i + " Pelé namora xuxa", "Pelé declara seu amor por xuxa e a loira corresponde.", "20/02/1970 - 10:40"));
+
+        loadNewsPager(newsFakeList);
     }
 
     /**
