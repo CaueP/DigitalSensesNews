@@ -8,7 +8,18 @@
         android:id="@+id/category_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:contentDescription="@string/categories_list_description">
+        android:contentDescription="@string/categories_list_description"
+
+        android:fadeScrollbars="false"
+        android:isScrollContainer="false"
+        android:keepScreenOn="true"
+        android:nestedScrollingEnabled="false"
+        android:overScrollMode="always"
+        android:scrollIndicators="right"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="horizontal|vertical"
+        android:verticalScrollbarPosition="right">
 
     </android.support.v7.widget.RecyclerView>
 

@@ -48,10 +48,10 @@ public class FragmentNewsTitle extends Fragment {
 
         if (news != null) {
             textViewNewsTitle.setText(news.getTitle());
-            //rootView.setContentDescription(textViewNewsTitle.getText());
+            rootView.setContentDescription(textViewNewsTitle.getText());
             textViewNewsTitle.setContentDescription(textViewNewsTitle.getText());
-            textViewNewsTitle.setFocusableInTouchMode(true);
-            textViewNewsTitle.setFocusable(true);
+            rootView.setFocusableInTouchMode(true);
+            rootView.setFocusable(true);
         } else Log.d(TAG, "NEWS IS NULL");
 
 //        textViewNewsTitle.setOnClickListener(new View.OnClickListener() {
