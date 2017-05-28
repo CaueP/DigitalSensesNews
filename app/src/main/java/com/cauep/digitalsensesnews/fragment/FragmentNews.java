@@ -2,7 +2,6 @@ package com.cauep.digitalsensesnews.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,11 +51,11 @@ public class FragmentNews extends Fragment {
         findViews();
 
         if (news != null) {
-            textViewNewsHeadline.setText(news.getHeadline());
+            textViewNewsHeadline.setText(news.getTitle());
             textViewNewsBody.setText(news.getBody());
 
             textViewNewsHeadline.setContentDescription(textViewNewsHeadline.getText());
-            
+
             textViewNewsBody.setContentDescription(textViewNewsBody.getText());
             textViewNewsBody.setFocusableInTouchMode(true);
             textViewNewsBody.setFocusable(true);
@@ -66,7 +65,7 @@ public class FragmentNews extends Fragment {
     }
 
     private void findViews() {
-        textViewNewsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_headline));
+        textViewNewsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_title));
         textViewNewsBody = ((TextView) rootView.findViewById(R.id.textView_news_body));
     }
 }

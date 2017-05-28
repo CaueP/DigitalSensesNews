@@ -15,24 +15,24 @@ public class News implements Serializable{
 
     @Expose
     @SerializedName("title")
-    private String headline;
+    private String title;
     private String body;
     private String date;
 
     // Constructor
-    public News(String headline, String body, String date) {
-        this.headline = headline;
+    public News(String title, String body, String date) {
+        this.title = title;
         this.body = body;
         this.date = date;
     }
 
     // Getters and Setters
-    public String getHeadline() {
-        return headline;
+    public String getTitle() {
+        return title;
     }
 
-    public void setHeadline(String headline) {
-        this.headline = headline;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getBody() {

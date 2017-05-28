@@ -14,8 +14,11 @@ import android.widget.Toast;
 
 import com.cauep.digitalsensesnews.R;
 import com.cauep.digitalsensesnews.controller.NewsPagerAdapter;
+import com.cauep.digitalsensesnews.model.News;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 /**
  * @author Caue Garcia Polimanti
@@ -163,7 +166,6 @@ public class FragmentNewsPager extends Fragment {
         }
         if (mViewPager.getCurrentItem() == mNewsPagerAdapter.getCount() - 1) {
             Toast.makeText(getActivity(), R.string.msg_last_item, Toast.LENGTH_SHORT).show();
-
         }
     }
 }

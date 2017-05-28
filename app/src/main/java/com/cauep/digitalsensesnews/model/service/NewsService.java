@@ -2,7 +2,7 @@ package com.cauep.digitalsensesnews.model.service;
 
 import com.cauep.digitalsensesnews.model.News;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -23,5 +23,5 @@ public interface NewsService {
      * @return Return a List of News objects
      */
     @GET("language}/{category}")
-    Call<List<News>> getNews(@Path("language") String language, @Path("category") String category);
+    Call<ArrayList<News>> getNews(@Path("language") String language, @Path("category") String category);
 }

@@ -28,14 +28,14 @@ public class FragmentNewsHeadline extends Fragment {
         // The last two arguments ensure LayoutParams are inflated
         // properly.
         View rootView = inflater.inflate(
-                R.layout.fragment_news_headline, container, false);
+                R.layout.fragment_news_title, container, false);
         Bundle args = getArguments();
 
         String newsId = "news" + Integer.toString(args.getInt(ARG_OBJECT));
 
         Log.d(TAG, "News ID: " + newsId);
 
-        textViewNewsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_headline));
+        textViewNewsHeadline = ((TextView) rootView.findViewById(R.id.textView_news_title));
 
         textViewNewsHeadline.setText(newsId);
         rootView.setContentDescription(textViewNewsHeadline.getText());
