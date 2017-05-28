@@ -47,11 +47,14 @@
         android:contentDescription="@string/news_image_description"
 
         />
-
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <TextView
         android:id="@+id/textView_news_body"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="3"
         android:focusable="true"
         android:focusableInTouchMode="true"
@@ -59,4 +62,6 @@
         android:text="ASDUHAISHDIASHDPIAHSDIAHSIDHASPIHDAISHDOIASHDOIZSAHODIAHSODHASOIUDHAOISHDOI ASDHSAH ASDUHISAHDA ISAUHD IUSAHDI AHSDI HASIDH AISDH ISDAH UIAHASZUHDOISAH"
 
         />
+    </ScrollView>
 </LinearLayout>
+

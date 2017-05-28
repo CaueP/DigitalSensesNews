@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity
 
         mainPageProgressBar = (ProgressBar) findViewById(R.id.main_page_progressBar);
 
-        mainPageProgressBar.setVisibility(View.VISIBLE);
+        showProgressAnimation();
 
         loadCategories();
         //loadFakeNews("pt", "tech");
@@ -79,12 +79,12 @@ public class MainActivity extends AppCompatActivity
     private void loadCategories() {
         Call<ArrayList<Category>> categoriesCall = categoryService.getCategories();
 
-        mainPageProgressBar.setVisibility(View.VISIBLE);
+        showProgressAnimation();
 
         Callback<ArrayList<Category>> categoriesCallback = new Callback<ArrayList<Category>>() {
             @Override
             public void onResponse(Call<ArrayList<Category>> call, Response<ArrayList<Category>> response) {
-                mainPageProgressBar.setVisibility(View.INVISIBLE);
+                hideProgressAnimation();
 
                 if (response.isSuccessful()) {
                     Log.d(TAG, "loadCategories - onResponse isSuccessful");
@@ -100,12 +100,20 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onFailure(Call<ArrayList<Category>> call, Throwable t) {
-                mainPageProgressBar.setVisibility(View.INVISIBLE);
+                hideProgressAnimation();
                 Log.d(TAG, "loadCategories - onFailure: " + t.getMessage());
             }
         };
 
         categoriesCall.enqueue(categoriesCallback);
+    }
+
+    void hideProgressAnimation(){
+        mainPageProgressBar.setVisibility(View.INVISIBLE);
+    }
+
+    void showProgressAnimation(){
+        mainPageProgressBar.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -116,12 +124,12 @@ public class MainActivity extends AppCompatActivity
      */
     private void loadNews(String language, String category) {
         Call<ArrayList<News>> newsCall = newsService.getNews(language, category);
-        mainPageProgressBar.setVisibility(View.VISIBLE);
+        showProgressAnimation();
 
         Callback<ArrayList<News>> newsCallback = new Callback<ArrayList<News>>() {
             @Override
             public void onResponse(Call<ArrayList<News>> call, Response<ArrayList<News>> response) {
-                mainPageProgressBar.setVisibility(View.INVISIBLE);
+                hideProgressAnimation();
                 if (response.isSuccessful()) {
                     Log.d(TAG, "loadNews - onResponse isSuccessful");
                     newsList = response.body();
@@ -136,7 +144,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onFailure(Call<ArrayList<News>> call, Throwable t) {
-                mainPageProgressBar.setVisibility(View.INVISIBLE);
+                hideProgressAnimation();
                 Log.d(TAG, "loadNews - onFailure: " + t.getMessage());
             }
         };
