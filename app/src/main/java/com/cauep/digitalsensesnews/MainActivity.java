@@ -1,8 +1,8 @@
 package com.cauep.digitalsensesnews;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 
 import com.cauep.digitalsensesnews.fragment.FragmentCategories;
@@ -14,8 +14,9 @@ import com.cauep.digitalsensesnews.model.service.CategoryService;
 import com.cauep.digitalsensesnews.model.service.NewsService;
 import com.cauep.digitalsensesnews.utils.Constants;
 import com.cauep.digitalsensesnews.utils.ServiceGenerator;
+
 import java.util.ArrayList;
-import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -119,6 +120,9 @@ public class MainActivity extends AppCompatActivity
         newsCall.enqueue(newsCallback);
     }
 
+    /**
+     * Load the available categories on API
+     */
     private void loadCategoriesRV(){
         Fragment categoriesFragment = new FragmentCategories();
         if(newsList != null){
@@ -129,6 +133,10 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Change fragment showed on main activity
+     * @param fragment Fragment to be showed
+     */
     private void changeFragment(Fragment fragment){
         getSupportFragmentManager()
                 .beginTransaction()
@@ -170,11 +178,15 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    /**
+     * FragmentCategories Interface implementation
+     * @param itemPosition Item position on the list
+     */
     @Override
     public void onCategorySelected(int itemPosition) {
         if (categoriesList!=null){
 
-            loadNews("en", categoriesList.get(itemPosition).getTitle());
+            loadNews("en", categoriesList.get(itemPosition).getCategory());
         }
     }
 }

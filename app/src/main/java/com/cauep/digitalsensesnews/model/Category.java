@@ -12,14 +12,14 @@ import java.io.Serializable;
 public class Category implements Serializable{
 
     @Expose
-    @SerializedName("title")
-    private String title;
+    @SerializedName("category")
+    private String category;
 
-    public Category(String title){
-        this.title = title;
+    public Category(String category){
+        this.category = category;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCategory() {
+        return category;
     }
 }
