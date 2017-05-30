@@ -1,4 +1,4 @@
-# DigitalSensesNews
+# Digital Senses - News
 Android native mobile application developed on the 1st Android Hackathon at Fatec Carapicuiba. 
 The application is meant to provide a news feed adapted  for people with visual disabilities.
 
