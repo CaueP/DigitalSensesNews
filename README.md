@@ -10,7 +10,8 @@ The project is composed of the Android app programmed on this repo and a [REST A
 - ViewPager
 - RecyclerView
 
-*Authors:* Cauê Polimanti (@CaueP) and Mário Aprá (@derrix060)
+*Authors:* Cauê Polimanti ([@CaueP](https://github.com/CaueP)) and Mário Aprá ([@derrix060](https://github.com/derrix060))
+
 ![alt text][icon_1_1] 3rd place
 
 [icon_1_1]: http://playserver.in.th/app_image/bronze_medal.png "1st Place"
