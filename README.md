@@ -2,7 +2,7 @@
 Android native mobile application developed on the 1st Android Hackathon at Fatec Carapicuiba. 
 The application is meant to provide a news feed adapted  for people with visual disabilities.
 
-The project is composed of the Android app programmed on this repo and a [REST API](https://github.com/CaueP/DigitalSensesNews). The Android app was programmed in Java and used the folowing libraries and technologies:
+The project is composed of the Android app programmed on this repo and a [REST API](https://github.com/derrix060/NewsBackend). The Android app was programmed in Java and used the folowing libraries and technologies:
 - Glide
 - Google Talkback
 - Gson
